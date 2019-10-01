@@ -12,10 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let m = DataModalManager()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Get a reference to the controller that is the app's entry point
+        let nav = window!.rootViewController as! UINavigationController
+        
+        // Get a reference to the first view controller
+        let vc = nav.viewControllers[0] as! FriendList
+        
+        vc.m = m
+        
         return true
     }
 

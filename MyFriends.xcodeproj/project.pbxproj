@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		B5D03E342343BB3E00076727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E332343BB3E00076727 /* AppDelegate.swift */; };
-		B5D03E362343BB3E00076727 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E352343BB3E00076727 /* ViewController.swift */; };
 		B5D03E392343BB3E00076727 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D03E372343BB3E00076727 /* Main.storyboard */; };
 		B5D03E3B2343BB4000076727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D03E3A2343BB4000076727 /* Assets.xcassets */; };
 		B5D03E3E2343BB4000076727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D03E3C2343BB4000076727 /* LaunchScreen.storyboard */; };
 		B5D03E492343BB4000076727 /* MyFriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E482343BB4000076727 /* MyFriendsTests.swift */; };
 		B5D03E542343BB4000076727 /* MyFriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E532343BB4000076727 /* MyFriendsUITests.swift */; };
+		B5D03E642343BBFF00076727 /* FriendScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E632343BBFF00076727 /* FriendScene.swift */; };
+		B5D03E662343BC5A00076727 /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E652343BC5A00076727 /* FriendList.swift */; };
+		B5D03E6B2343C16800076727 /* DataModelClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E6A2343C16800076727 /* DataModelClasses.swift */; };
+		B5D03E6D2343C1F200076727 /* DataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E6C2343C1F200076727 /* DataModelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,6 @@
 /* Begin PBXFileReference section */
 		B5D03E302343BB3E00076727 /* MyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D03E332343BB3E00076727 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5D03E352343BB3E00076727 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5D03E382343BB3E00076727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5D03E3A2343BB4000076727 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D03E3D2343BB4000076727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,10 @@
 		B5D03E4F2343BB4000076727 /* MyFriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFriendsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D03E532343BB4000076727 /* MyFriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsUITests.swift; sourceTree = "<group>"; };
 		B5D03E552343BB4000076727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5D03E632343BBFF00076727 /* FriendScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScene.swift; sourceTree = "<group>"; };
+		B5D03E652343BC5A00076727 /* FriendList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
+		B5D03E6A2343C16800076727 /* DataModelClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelClasses.swift; sourceTree = "<group>"; };
+		B5D03E6C2343C1F200076727 /* DataModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				B5D03E332343BB3E00076727 /* AppDelegate.swift */,
-				B5D03E352343BB3E00076727 /* ViewController.swift */,
 				B5D03E372343BB3E00076727 /* Main.storyboard */,
 				B5D03E3A2343BB4000076727 /* Assets.xcassets */,
 				B5D03E3C2343BB4000076727 /* LaunchScreen.storyboard */,
+				B5D03E652343BC5A00076727 /* FriendList.swift */,
 				B5D03E3F2343BB4000076727 /* Info.plist */,
+				B5D03E632343BBFF00076727 /* FriendScene.swift */,
+				B5D03E6A2343C16800076727 /* DataModelClasses.swift */,
+				B5D03E6C2343C1F200076727 /* DataModelManager.swift */,
 			);
 			path = MyFriends;
 			sourceTree = "<group>";
@@ -256,8 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5D03E362343BB3E00076727 /* ViewController.swift in Sources */,
+				B5D03E6D2343C1F200076727 /* DataModelManager.swift in Sources */,
 				B5D03E342343BB3E00076727 /* AppDelegate.swift in Sources */,
+				B5D03E642343BBFF00076727 /* FriendScene.swift in Sources */,
+				B5D03E6B2343C16800076727 /* DataModelClasses.swift in Sources */,
+				B5D03E662343BC5A00076727 /* FriendList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +444,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MyFriends/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -440,6 +453,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ericrabiner.MyFriends;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,7 +463,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MyFriends/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -457,6 +472,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ericrabiner.MyFriends;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
