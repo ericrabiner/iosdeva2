@@ -35,7 +35,7 @@ class FriendList: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return friendPackage.count
+        return friendPackage.data.count
     }
 
     
@@ -50,6 +50,10 @@ class FriendList: UITableViewController {
         return cell
     }
     
+    // iOS runtime calls this when user taps on row
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,14 +90,24 @@ class FriendList: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+        if segue.identifier == "toFriend" {
+            
+            // Get a reference to the destination view controller
+            let vc = segue.destination as! FriendScene
+            
+            // Pass on the data
+            vc.friendPackage = friendPackage
+            vc.indexPath = indexPath
+        }
+        
     }
-    */
-
+    
 }

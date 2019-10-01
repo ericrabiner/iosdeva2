@@ -9,11 +9,17 @@
 import UIKit
 
 class FriendScene: UIViewController {
+    
+    var indexPath: IndexPath!
+    var friendPackage: PackageFriends!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        title = friendPackage.data[indexPath.row].lastName
+        
     }
     
 
