@@ -10,6 +10,12 @@ import UIKit
 
 class FriendScene: UIViewController {
     
+    @IBOutlet weak var firstName: UILabel!
+    @IBOutlet weak var lastName: UILabel!
+    @IBOutlet weak var age: UILabel!
+    @IBOutlet weak var city: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    
     var indexPath: IndexPath!
     var friendPackage: PackageFriends!
 
@@ -17,8 +23,10 @@ class FriendScene: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        title = friendPackage.data[indexPath.row].lastName
+        firstName.text = friendPackage.data[indexPath.row].firstName
+        lastName.text = friendPackage.data[indexPath.row].lastName
+        age.text = String(friendPackage.data[indexPath.row].age)
+        city.text = friendPackage.data[indexPath.row].city
         
     }
     

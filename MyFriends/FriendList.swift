@@ -95,19 +95,12 @@ class FriendList: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
         if segue.identifier == "toFriend" {
-            
-            // Get a reference to the destination view controller
             let vc = segue.destination as! FriendScene
-            
-            // Pass on the data
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
             vc.friendPackage = friendPackage
             vc.indexPath = indexPath
         }
-        
     }
     
 }
