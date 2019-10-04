@@ -10,23 +10,83 @@ import Foundation
 
 class DataModalManager {
     
-    private var friend1: Friend
-    private var friend2: Friend
-    private var friend3: Friend
-    private var friend4: Friend
-    private var friends: PackageFriends
+    var urlDocumentsFriends: URL?
+    var pathBundleFriends: String?
+    var friends: FriendPackage!
     
     init() {
-        friend1 = Friend(firstName: "Max", lastName: "Rabs", age: 20, city: "Toronto")
-        friend2 = Friend(firstName: "Nacho", lastName: "Libre", age: 18, city: "Rhill")
-        friend3 = Friend(firstName: "Mickey", lastName: "Jerry", age: 23, city: "Markham")
-        friend4 = Friend(firstName: "Tom", lastName: "Jeff", age: 24, city: "Toronto")
         
-        friends = PackageFriends(firstName: "Eric", lastName: "Rabiner", timestamp: Date(), count: 4, data: [friend1, friend2, friend3, friend4])
+        urlDocumentsFriends = FileManager.default
+            .urls(for: .documentDirectory, in: .userDomainMask)
+            .first?
+            .appendingPathComponent("data-friends.json")
+        
+        pathBundleFriends = Bundle.main.path(forResource: "data-friends", ofType: "json")
+        
+        loadData()
     }
     
-    func FriendsGet() -> PackageFriends {
+    func FriendsGet() -> FriendPackage {
         return friends
     }
-
+    
+    private func loadData() {
+        
+        var friendsData: Data!
+        
+        if FileManager.default.fileExists(atPath: urlDocumentsFriends!.absoluteString) {
+            do {
+                friendsData = try Data(contentsOf: urlDocumentsFriends!)
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        else {
+            do {
+                friendsData = try Data(contentsOf: URL(fileURLWithPath: pathBundleFriends!))
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        let decoder = JSONDecoder()
+        
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+        
+        do {
+            let result = try decoder.decode(FriendPackage.self, from: friendsData)
+            self.friends = result
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func saveData() {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
+        if let encodedData = try? encoder.encode(self.friends) {
+            do {
+                try encodedData.write(to: urlDocumentsFriends!)
+            }
+            catch {
+                print("Failed to write friends data: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func friendAdd(_ newItem: Friend) -> Friend? {
+        let localNewItem = newItem
+        if !newItem.firstName.isEmpty && !newItem.lastName.isEmpty && newItem.age > 0 && !newItem.city.isEmpty {
+            friends.data.append(localNewItem)
+            friends.count = friends.data.count
+            friends.timestamp = Date()
+            
+            return friends.data.last
+        }
+        return nil
+    }
+    
 }

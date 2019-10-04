@@ -8,26 +8,48 @@
 
 import UIKit
 
-class FriendList: UITableViewController {
+class FriendList: UITableViewController, FriendAddDelegate {
     
+    // MARK: - Instance variables
     var m: DataModalManager!
-    private var friendPackage: PackageFriends!
     
+    private var friendPackage: FriendPackage!
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         friendPackage = m.FriendsGet()
-        title = "\(friendPackage.firstName) \(friendPackage.lastName)'s friends"
-
+        title = "Eric's friends"
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        friendPackage = m.FriendsGet()
+        tableView.reloadData()
+    }
+    
+    func showDetailDone(_ controller: UIViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func addTaskDidCancel(_ controller: UIViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func addTask(_ controller: UIViewController, didSave item: Friend) {
+        if m.friendAdd(item) != nil {
+            dismiss(animated: true, completion: nil)
+        }
+    }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -37,7 +59,6 @@ class FriendList: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return friendPackage.data.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
@@ -46,7 +67,6 @@ class FriendList: UITableViewController {
         cell.textLabel?.text = friendPackage.data[indexPath.row].firstName
         cell.detailTextLabel?.text =  friendPackage.data[indexPath.row].lastName
         
-
         return cell
     }
     
@@ -95,11 +115,19 @@ class FriendList: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toFriend" {
+        if segue.identifier == "toFriendDetail" {
             let vc = segue.destination as! FriendScene
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
             vc.friendPackage = friendPackage
             vc.indexPath = indexPath
+            vc.title = "Friend Details"
+        }
+        
+        if segue.identifier == "toFriendAdd" {
+            let nav = segue.destination as! UINavigationController
+            let vc = nav.viewControllers[0] as! FriendAdd
+            vc.title = "Add Friend"
+            vc.delegate = self
         }
     }
     

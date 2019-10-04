@@ -10,19 +10,21 @@ import UIKit
 
 class FriendScene: UIViewController {
     
+    // MARK: - Instance variables
+    var indexPath: IndexPath!
+    var friendPackage: FriendPackage!
+    
+    // MARK: - Outlets
     @IBOutlet weak var firstName: UILabel!
     @IBOutlet weak var lastName: UILabel!
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var city: UILabel!
     @IBOutlet weak var image: UIImageView!
     
-    var indexPath: IndexPath!
-    var friendPackage: PackageFriends!
-
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         firstName.text = friendPackage.data[indexPath.row].firstName
         lastName.text = friendPackage.data[indexPath.row].lastName
         age.text = String(friendPackage.data[indexPath.row].age)
