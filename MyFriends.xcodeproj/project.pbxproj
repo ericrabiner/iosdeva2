@@ -113,11 +113,11 @@
 				B5D03E3A2343BB4000076727 /* Assets.xcassets */,
 				B5CFD0B62347E8E5006C1513 /* data-friends.json */,
 				B5D03E332343BB3E00076727 /* AppDelegate.swift */,
+				B5D03E6A2343C16800076727 /* DataModelClasses.swift */,
+				B5D03E6C2343C1F200076727 /* DataModelManager.swift */,
 				B5CFD0BA2347F03F006C1513 /* FriendAdd.swift */,
 				B5D03E652343BC5A00076727 /* FriendList.swift */,
 				B5D03E632343BBFF00076727 /* FriendScene.swift */,
-				B5D03E6A2343C16800076727 /* DataModelClasses.swift */,
-				B5D03E6C2343C1F200076727 /* DataModelManager.swift */,
 			);
 			path = MyFriends;
 			sourceTree = "<group>";
@@ -462,7 +462,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ericrabiner.MyFriends;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -481,7 +481,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ericrabiner.MyFriends;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -9,11 +9,13 @@
 import Foundation
 
 class Friend: Codable {
-    var firstName: String
-    var lastName: String
-    var age: Int
-    var city: String
+    // MARK: - Data properties
+    var firstName: String = ""
+    var lastName: String = ""
+    var age: Int = 0
+    var city: String = ""
     
+    // MARK: - Initializers
     init(firstName: String, lastName: String, age: Int, city: String) {
         self.firstName = firstName
         self.lastName = lastName
@@ -23,17 +25,11 @@ class Friend: Codable {
 }
 
 class FriendPackage: Codable {
-    var timestamp: Date
-    var version: String
-    var count: Int
-    var data: [Friend]
-    
-    init(timestamp: Date, version: String, count: Int, data: [Friend]) {
-        self.timestamp = timestamp
-        self.version = version
-        self.count = count
-        self.data = data
-    }
+    // MARK: - Data properties
+    var timestamp: Date = Date()
+    var version: String = "1.0.0"
+    var count: Int = 0
+    var data = [Friend]()
 }
 
 extension DateFormatter {

@@ -11,29 +11,30 @@ import UIKit
 class FriendScene: UIViewController {
     
     // MARK: - Instance variables
-    var indexPath: IndexPath!
-    var friendPackage: FriendPackage!
+    var item: Friend!
     
     // MARK: - Outlets
     @IBOutlet weak var firstName: UILabel!
     @IBOutlet weak var lastName: UILabel!
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var city: UILabel!
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var photo: UIImageView!
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        firstName.text = friendPackage.data[indexPath.row].firstName
-        lastName.text = friendPackage.data[indexPath.row].lastName
-        age.text = String(friendPackage.data[indexPath.row].age)
-        city.text = friendPackage.data[indexPath.row].city
+        firstName.text = item.firstName
+        lastName.text = item.lastName
+        age.text = String(item.age)
+        city.text = item.city
+        photo.image = UIImage(named: "blankphoto")
         
     }
     
 
-    /*
+    /*ß
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

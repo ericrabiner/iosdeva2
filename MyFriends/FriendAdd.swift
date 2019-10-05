@@ -17,10 +17,11 @@ protocol FriendAddDelegate: AnyObject {
     // Recommendation - change the type to match the actual item type
 }
 
-class FriendAdd: UIViewController {
+class FriendAdd: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - Instance variables
     weak var delegate: FriendAddDelegate?
+    var photo: UIImage?
     
     // MARK: - Outlets
     @IBOutlet weak var firstNameInput: UITextField!
@@ -28,6 +29,7 @@ class FriendAdd: UIViewController {
     @IBOutlet weak var ageInput: UITextField!
     @IBOutlet weak var cityInput: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var pickedPhoto: UIImageView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -37,6 +39,21 @@ class FriendAdd: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         firstNameInput.becomeFirstResponder()
+    }
+    
+    func getPhotoWithCameraOrPhotoLibrary() {
+        
+        // Create the image picker controller
+        let c = UIImagePickerController()
+        
+        // Determine what we can use...
+        // Prefer the camera, but can use the photo library
+        c.sourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
+        
+        c.delegate = self
+        c.allowsEditing = false
+        // Show the controller
+        present(c, animated: true, completion: nil)
     }
     
     // MARK: - Actions
@@ -93,14 +110,31 @@ class FriendAdd: UIViewController {
         delegate?.addTaskDidCancel(self)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func addPhoto(_ sender: UIButton) {
+        getPhotoWithCameraOrPhotoLibrary()
     }
-    */
+    
+    // MARK: - Image picker delegate methods
+    // Cancel
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Save
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        // The info dictionary may contain multiple representations of the image. You want to use the original.
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        // Set photoImageView to display the selected image.
+        pickedPhoto.image = selectedImage
+        
+        // Dismiss the picker.
+        dismiss(animated: true, completion: nil)
+    }
 
 }

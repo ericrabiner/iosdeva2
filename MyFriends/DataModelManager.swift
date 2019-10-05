@@ -10,66 +10,84 @@ import Foundation
 
 class DataModalManager {
     
-    var urlDocumentsFriends: URL?
-    var pathBundleFriends: String?
-    var friends: FriendPackage!
+    // MARK: Data properties
+    var friendPackage = FriendPackage()
     
+    // MARK: - Initializers
     init() {
         
-        urlDocumentsFriends = FileManager.default
-            .urls(for: .documentDirectory, in: .userDomainMask)
-            .first?
-            .appendingPathComponent("data-friends.json")
-        
-        pathBundleFriends = Bundle.main.path(forResource: "data-friends", ofType: "json")
-        
         loadData()
+        
+        // First time loading?
+        if friendPackage.data.count == 0 {
+            friendPackage.data.append(Friend(firstName: "Max", lastName: "Rabiner", age: 20, city: "Richmond Hill"))
+            friendPackage.data.append(Friend(firstName: "Tom", lastName: "Jerry", age: 23, city: "Toronto"))
+            friendPackage.data.append(Friend(firstName: "Nacho", lastName: "Mickey", age: 25, city: "Markham"))
+            
+            friendPackage.count = friendPackage.data.count
+        }
     }
     
     func FriendsGet() -> FriendPackage {
-        return friends
+        return friendPackage
+    }
+    
+    private func appBundlePath() -> String? {
+        return Bundle.main.path(forResource: "data-friends", ofType: "json")
+    }
+    
+    private func appDocumentsPath() -> URL? {
+        return FileManager.default
+            .urls(for: .documentDirectory, in: .userDomainMask)
+            .first?
+            .appendingPathComponent("data-friends.json")
     }
     
     private func loadData() {
         
-        var friendsData: Data!
+        var appData = Data()
         
-        if FileManager.default.fileExists(atPath: urlDocumentsFriends!.absoluteString) {
+        if let path = appDocumentsPath() {
             do {
-                friendsData = try Data(contentsOf: urlDocumentsFriends!)
+                appData = try Data(contentsOf: path)
             }
             catch {
                 print(error.localizedDescription)
             }
         }
-        else {
+        else if let path = appBundlePath() {
             do {
-                friendsData = try Data(contentsOf: URL(fileURLWithPath: pathBundleFriends!))
+                appData = try Data(contentsOf: URL(fileURLWithPath: path))
             }
             catch {
                 print(error.localizedDescription)
             }
         }
         
-        let decoder = JSONDecoder()
-        
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
-        
-        do {
-            let result = try decoder.decode(FriendPackage.self, from: friendsData)
-            self.friends = result
-        }
-        catch {
-            print(error)
+        // Attempt to decode, but only if appData has something in it
+        if appData.count > 0 {
+            // Create and configure a JSON decoder
+            let decoder = JSONDecoder()
+            // Choose the desired date decoding strategy
+            decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+            // Attempt to decode the data into a "FriendPackage" object
+            do {
+                let result = try decoder.decode(FriendPackage.self, from: appData)
+                // Publish the result
+                self.friendPackage = result
+            }
+            catch {
+                print("Decode error", error)
+            }
         }
     }
     
     func saveData() {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
-        if let encodedData = try? encoder.encode(self.friends) {
+        if let encodedData = try? encoder.encode(self.friendPackage) {
             do {
-                try encodedData.write(to: urlDocumentsFriends!)
+                try encodedData.write(to: appDocumentsPath()!)
             }
             catch {
                 print("Failed to write friends data: \(error.localizedDescription)")
@@ -80,13 +98,19 @@ class DataModalManager {
     func friendAdd(_ newItem: Friend) -> Friend? {
         let localNewItem = newItem
         if !newItem.firstName.isEmpty && !newItem.lastName.isEmpty && newItem.age > 0 && !newItem.city.isEmpty {
-            friends.data.append(localNewItem)
-            friends.count = friends.data.count
-            friends.timestamp = Date()
+            friendPackage.data.append(localNewItem)
+            friendPackage.count = friendPackage.data.count
+            friendPackage.timestamp = Date()
             
-            return friends.data.last
+            return friendPackage.data.last
         }
         return nil
+    }
+    
+    func friendsSortedByFirstName() -> [Friend] {
+        let sortedFriends = friendPackage.data.sorted(by: { (f1: Friend, f2: Friend) -> Bool in return f1.firstName.lowercased() < f2.firstName.lowercased() })
+        
+        return sortedFriends
     }
     
 }
