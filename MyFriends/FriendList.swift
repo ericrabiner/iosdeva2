@@ -81,6 +81,7 @@ class FriendList: UITableViewController, FriendAddDelegate {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
             let selectedData = items[indexPath!.row]
             vc.item = selectedData
+            vc.m = m
             vc.title = "Friend Details"
         }
         
@@ -88,6 +89,7 @@ class FriendList: UITableViewController, FriendAddDelegate {
             let nav = segue.destination as! UINavigationController
             let vc = nav.viewControllers[0] as! FriendAdd
             vc.title = "Add Friend"
+            vc.m = m
             vc.delegate = self
         }
     }

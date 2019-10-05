@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B5CFD0B72347E8E5006C1513 /* data-friends.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CFD0B62347E8E5006C1513 /* data-friends.json */; };
 		B5CFD0BB2347F03F006C1513 /* FriendAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFD0BA2347F03F006C1513 /* FriendAdd.swift */; };
 		B5D03E342343BB3E00076727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D03E332343BB3E00076727 /* AppDelegate.swift */; };
 		B5D03E392343BB3E00076727 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D03E372343BB3E00076727 /* Main.storyboard */; };
@@ -39,7 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B5CFD0B62347E8E5006C1513 /* data-friends.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "data-friends.json"; sourceTree = "<group>"; };
 		B5CFD0BA2347F03F006C1513 /* FriendAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAdd.swift; sourceTree = "<group>"; };
 		B5D03E302343BB3E00076727 /* MyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D03E332343BB3E00076727 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 				B5D03E3C2343BB4000076727 /* LaunchScreen.storyboard */,
 				B5D03E3F2343BB4000076727 /* Info.plist */,
 				B5D03E3A2343BB4000076727 /* Assets.xcassets */,
-				B5CFD0B62347E8E5006C1513 /* data-friends.json */,
 				B5D03E332343BB3E00076727 /* AppDelegate.swift */,
 				B5D03E6A2343C16800076727 /* DataModelClasses.swift */,
 				B5D03E6C2343C1F200076727 /* DataModelManager.swift */,
@@ -247,7 +244,6 @@
 				B5D03E3E2343BB4000076727 /* LaunchScreen.storyboard in Resources */,
 				B5D03E3B2343BB4000076727 /* Assets.xcassets in Resources */,
 				B5D03E392343BB3E00076727 /* Main.storyboard in Resources */,
-				B5CFD0B72347E8E5006C1513 /* data-friends.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

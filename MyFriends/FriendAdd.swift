@@ -21,6 +21,7 @@ class FriendAdd: UIViewController, UIImagePickerControllerDelegate, UINavigation
     
     // MARK: - Instance variables
     weak var delegate: FriendAddDelegate?
+    var m: DataModalManager!
     var photo: UIImage?
     
     // MARK: - Outlets
@@ -98,12 +99,25 @@ class FriendAdd: UIViewController, UIImagePickerControllerDelegate, UINavigation
         // Validation Passes here
         
         // Create a friend Object
-        let newFriend = Friend(firstName: firstNameInput.text!, lastName: lastNameInput.text!, age: age, city: cityInput.text!)
-        
         errorMessage.text = "Attempting to save..."
-        
-        delegate?.addTask(self, didSave: newFriend)
-        
+        if pickedPhoto.image == nil {
+            let newFriend = Friend(firstName: firstNameInput.text!, lastName: lastNameInput.text!, age: age, city: cityInput.text!, imageName: "")
+            delegate?.addTask(self, didSave: newFriend)
+        }
+        else {
+            var image: UIImage?
+            var fileName: String
+            repeat {
+                let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                fileName = String((0..<25).map{ _ in letters.randomElement()! })
+                image = m.loadImage(fileName: fileName)
+            } while image != nil
+
+            m.saveImage(imageName: fileName, image: pickedPhoto.image!)
+            let newFriend = Friend(firstName: firstNameInput.text!, lastName: lastNameInput.text!, age: age, city: cityInput.text!, imageName: fileName)
+            delegate?.addTask(self, didSave: newFriend)
+            
+        }
     }
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {

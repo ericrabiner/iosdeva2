@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DataModalManager {
     
@@ -20,9 +21,9 @@ class DataModalManager {
         
         // First time loading?
         if friendPackage.data.count == 0 {
-            friendPackage.data.append(Friend(firstName: "Max", lastName: "Rabiner", age: 20, city: "Richmond Hill"))
-            friendPackage.data.append(Friend(firstName: "Tom", lastName: "Jerry", age: 23, city: "Toronto"))
-            friendPackage.data.append(Friend(firstName: "Nacho", lastName: "Mickey", age: 25, city: "Markham"))
+            friendPackage.data.append(Friend(firstName: "Max", lastName: "Rabiner", age: 20, city: "Richmond Hill", imageName: ""))
+            friendPackage.data.append(Friend(firstName: "Tom", lastName: "Jerry", age: 23, city: "Toronto", imageName: ""))
+            friendPackage.data.append(Friend(firstName: "Nacho", lastName: "Mickey", age: 25, city: "Markham", imageName: ""))
             
             friendPackage.count = friendPackage.data.count
         }
@@ -112,5 +113,33 @@ class DataModalManager {
         
         return sortedFriends
     }
+    
+    func loadImage(fileName: String) -> UIImage? {
+        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+        if let dirPath = paths.first {
+            let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+            let image = UIImage(contentsOfFile: imageUrl.path)
+            return image
+        }
+        return nil
+    }
+    
+    func saveImage(imageName: String, image: UIImage) {
+        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileName = imageName
+        let fileUrl = documentsDirectory.appendingPathComponent(fileName)
+        guard let data = image.jpegData(compressionQuality: 1) else { return }
+        
+        do {
+            try data.write(to: fileUrl)
+        }
+        catch let error {
+            print("Error saving: \(error)")
+        }
+    }
+    
+   
     
 }

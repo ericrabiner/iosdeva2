@@ -14,13 +14,15 @@ class Friend: Codable {
     var lastName: String = ""
     var age: Int = 0
     var city: String = ""
+    var imageName: String = ""
     
     // MARK: - Initializers
-    init(firstName: String, lastName: String, age: Int, city: String) {
+    init(firstName: String, lastName: String, age: Int, city: String, imageName: String) {
         self.firstName = firstName
         self.lastName = lastName
         self.age = age
         self.city = city
+        self.imageName = imageName
     }
 }
 
