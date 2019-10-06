@@ -8,11 +8,20 @@
 
 import UIKit
 
+class FriendsTableViewCell: UITableViewCell {
+    // MARK: - Outlets
+    @IBOutlet weak var friendImage: UIImageView!
+    @IBOutlet weak var friendFirstName: UILabel!
+    @IBOutlet weak var friendLastName: UILabel!
+}
+
 class FriendList: UITableViewController, FriendAddDelegate {
     
     // MARK: - Instance variables
     var m: DataModalManager!
     var items = [Friend]()
+    
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -60,13 +69,24 @@ class FriendList: UITableViewController, FriendAddDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath) as! FriendsTableViewCell
 
         // Configure the cell...
-        cell.textLabel?.text = items[indexPath.row].firstName
-        cell.detailTextLabel?.text = items[indexPath.row].lastName
+        cell.friendFirstName?.text = items[indexPath.row].firstName
+        cell.friendLastName?.text = items[indexPath.row].lastName
+        
+        if items[indexPath.row].imageName == "" {
+            cell.friendImage!.image = UIImage(named: "blankphoto")
+        }
+        else {
+            cell.friendImage!.image = m.loadImage(fileName: items[indexPath.row].imageName)
+        }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
     }
     
     // iOS runtime calls this when user taps on row
