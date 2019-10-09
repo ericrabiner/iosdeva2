@@ -42,6 +42,11 @@ class FriendAdd: UIViewController, UIImagePickerControllerDelegate, UINavigation
         firstNameInput.becomeFirstResponder()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func getPhotoWithCameraOrPhotoLibrary() {
         
         // Create the image picker controller
