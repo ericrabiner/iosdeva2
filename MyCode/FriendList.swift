@@ -21,6 +21,8 @@ class FriendList: UITableViewController, FriendAddDelegate {
     var m: DataModalManager!
     var items = [Friend]()
     
+    
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
