@@ -89,11 +89,16 @@ class FriendAdd: UIViewController, UIImagePickerControllerDelegate, UINavigation
         if let value = Int(ageInput.text!) {
             // Yes, successful, save it for later
             age = value
-            // Mxust be a number that makes sense
+            // Must be a number that makes sense
             if value <= 0 {
                 errorMessage.text = "Invalid age"
                 return
             }
+        }
+        else {
+            // If age is not an Int
+            errorMessage.text = "Invalid age"
+            return
         }
         
         // Validation Passes here
